@@ -1,10 +1,17 @@
-FROM python:3.7
+FROM ubuntu:20.04
+
+RUN apt update
+RUN apt-get install -y python3.9 python3-pip python3-dev build-essential gcc libsnmp-dev snmp-mibs-downloader
+
+RUN pip3 install --upgrade pip
 
 RUN mkdir /app
 WORKDIR /app
-ADD . /app/
-RUN pip install -r requirements.txt
+COPY . /app
+RUN pip3 install -r requirements.txt
 
-#EXPOSE 5000
-CMD ["python", "/app/api.py"]
-CMD ["python", "/app/engine.py"]
+WORKDIR /app/api
+CMD python3 api.py
+
+WORKDIR /app/engine
+CMD python3 engine.py
