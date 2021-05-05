@@ -8,6 +8,6 @@ services:
 #        - "bash  snmp_collector/start.sh"
 #        - "bash  proto_conversion/start.sh"
       restart: unless-stopped
-      # ports:
-      #   - 8008:8008
+      ports:
+        - 5001:5001
       # tty: true
